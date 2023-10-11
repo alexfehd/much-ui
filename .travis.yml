@@ -9,3 +9,15 @@ before_install:
     
 script:
     - docker run -e CI=true alexf/frontend npm run test -- --watchAll=false
+    
+deploy:
+    provider: elasticbeanstalk
+    region: "eu-central-1"
+    app: "Frontend"
+    env: "Frontend-env"
+    bucket_name: "elasticbeanstalk-eu-central-1-540082409514"
+    bucket_path: "Frontend"
+    on:
+        branch: master
+    access_key_id: $AWS_ACCESS_KEY
+    secret_access_key: "$AWS_SECRET_KEY"
